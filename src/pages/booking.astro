@@ -1,0 +1,239 @@
+---
+import Layout from '../layouts/Layout.astro';
+import gigsData from '../data/gigs.json';
+
+const occupiedDates = gigsData.map(gig => gig.date);
+const today = new Date().toISOString().split('T')[0];
+---
+
+<Layout title="Booking | 3/4ZWÖÖÖLWE">
+  <section class="booking-section">
+    <div class="container">
+      <h1 class="white-rock-style">BUCHUNGSANFRAGE</h1>
+      <p class="snappy-text">HOL DIR DEN SOUND DIREKT AUF DEINE BÜHNE.</p>
+
+      <div class="form-wrapper">
+        <form id="booking-form">
+          <input type="hidden" name="access_key" value="caf048fb-950a-49a3-a2a6-1123afbfa973" />
+          <input type="hidden" name="subject" value="Neue Buchungsanfrage" />
+          <input type="hidden" name="from_name" value="3/4ZWÖÖÖLWE Website" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="vorname"></label>
+              <input type="text" name="vorname" id="vorname" required placeholder="Vorname" />
+            </div>
+
+            <div class="input-group">
+              <label for="nachname"></label>
+              <input type="text" name="nachname" id="nachname" required placeholder="Nachname" />
+            </div>
+
+            <div class="input-group">
+              <label for="email"></label>
+              <input type="email" name="email" id="email" required placeholder="Email@beispiel.de" />
+            </div>
+
+            <div class="input-group">
+              <label for="tel"></label>
+              <input type="tel" name="tel" id="tel" placeholder="+49... Optional" />
+            </div>
+
+            <div class="input-group full-width">
+              <label for="date">WUNSCHTERMIN*</label>
+              <input type="date" name="date" id="date" required min={today} />
+              <p id="date-error" class="error-msg">Dieses Datum ist leider schon belegt! Schick uns aber gern eine Nachricht!</p>
+            </div>
+
+            <div class="input-group full-width">
+              <label for="message"></label>
+              <textarea name="message" id="message" rows="4" placeholder="Wo sollen wir hinkommen und was hast du geplant?"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="ticket-btn rock-btn">
+            Anfrage absenden
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="success-popup" class="popup-overlay">
+      <div class="popup-content">
+        <h2 class="white-rock-style">DANKE!</h2>
+        <p>Deine Anfrage ist gesendet. Wir melden uns schnellstmöglich bei dir!</p>
+        <button id="close-popup" class="ticket-btn rock-btn">ZURÜCK</button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ occupiedDates }}>
+  const form = document.getElementById('booking-form');
+  const dateInput = document.getElementById('date');
+  const dateError = document.getElementById('date-error');
+  const popup = document.getElementById('success-popup');
+  const closePopup = document.getElementById('close-popup');
+  const submitBtn = document.getElementById('submit-btn');
+
+  // Datum-Check
+  dateInput.addEventListener('change', (e) => {
+    if (occupiedDates.includes(e.target.value)) {
+      dateError.style.opacity = '1';
+      dateInput.value = '';
+    } else {
+      dateError.style.opacity = '0';
+    }
+  });
+
+  // Formular absenden via AJAX
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.innerText = "SENDE...";
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: json
+      });
+      
+      if (response.status === 200) {
+        popup.classList.add('active');
+        form.reset();
+      } else {
+        alert("FEHLER BEIM SENDEN. BITTE NOCHMAL VERSUCHEN.");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("ETWAS IST SCHIEFGELAUFEN.");
+    } finally {
+      submitBtn.innerText = "ANFRAGE ABSCHICKEN";
+      submitBtn.disabled = false;
+    }
+  });
+
+  closePopup.addEventListener('click', () => {
+    popup.classList.remove('active');
+  });
+</script>
+
+<style>
+  .booking-section {
+    padding: 6rem 1rem;
+    background-color: #050505;
+    min-height: 100vh;
+  }
+
+  .form-wrapper {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: #111;
+    padding: 2.5rem;
+    border-left: 5px solid #ff0000;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .full-width { grid-column: span 2; }
+
+  label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #ccc;
+    letter-spacing: 1px;
+  }
+
+  input, textarea {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    padding: 1rem;
+    color: #fff;
+    font-family: inherit;
+    transition: border-color 0.3s;
+  }
+
+  input:focus, textarea:focus {
+    border-color: #ff0000;
+    outline: none;
+    background: #222;
+  }
+
+  .error-msg {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* Der Rock-Button Style (angepasst an deinen Rest) */
+  .ticket-btn.rock-btn {
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+    transition: transform 0.2s, background 0.3s;
+    margin-top: 1rem;
+    width: fit-content;
+  }
+
+  .ticket-btn.rock-btn:hover {
+    background: #cc0000;
+    transform: scale(1.05);
+  }
+
+  /* Popup Styles */
+  .popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .popup-content {
+    background: #111;
+    padding: 3rem;
+    text-align: center;
+    border: 3px solid #ff0000;
+    max-width: 400px;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .form-wrapper { padding: 1.5rem; }
+  }
+</style>
