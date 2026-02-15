@@ -168,15 +168,17 @@ import Gigs from '../components/Gigs.astro';
 
 @media (max-width: 400px) {
   .white-rock-style {
-    /* Schrift skaliert automatisch: 15% der Bildschirmbreite */
-    /* clamp sorgt dafür, dass sie nicht zu klein und nicht zu groß wird */
-    font-size: clamp(2.5rem, 15vw, 4rem); 
+    /* Mindestgröße: 2.8rem (vorher 2.5rem)
+       Skalierung: 16vw (vorher 15vw)
+       Maximalgröße: 4.5rem (vorher 4rem)
+    */
+    font-size: clamp(2.8rem, 16vw, 4.5rem); 
     
-    /* Den Schatten für kleinste Screens etwas dezenter machen */
-    text-shadow: 0.03em 0.03em 0px #ff0000;
+    /* Den Schatten lassen wir bei 0.04em, damit er markant bleibt */
+    text-shadow: 0.04em 0.04em 0px #ff0000;
     
-    line-height: 0.85;
-    letter-spacing: -0.02em; /* Verhindert zu große Lücken beim Schrumpfen */
+    line-height: 0.9;
+    letter-spacing: 0.01em; /* Ein Hauch mehr Platz zwischen den Lettern */
   }
 }
 </style>
