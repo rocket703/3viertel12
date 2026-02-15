@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Gigs from '../components/Gigs.astro';
+---
+
+<Layout title="Home" currentPage="home">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="band-name-wrapper">
+     <h1 class="band-name">
+  <span class="name-top red-block">3/4</span>
+  <span class="name-bottom white-rock-style">ZWÖÖÖLWE</span>
+</h1>
+      </div>
+      
+      <div class="tagline-container">
+        <p class="tagline subtitle-style" id="tagline">ROCK 'N' ROLL</p>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#gigs" class="cta-link block-font">NÄCHSTE GIGS ↓</a>
+      </div>
+    </div>
+    <div class="noise"></div>
+  </section>
+
+  <section class="about-brief">
+    <div class="about-container">
+      
+      <div class="about-visual">
+        <div class="image-backdrop"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop" 
+          alt="Band Platzhalter" 
+          class="rock-image"
+        />
+      </div>
+
+      <div class="about-text-content">
+        <h2 class="white-rock-style small-heading">DIE BAND</h2>
+        <p class="snappy-text">
+          KEIN SCHNICKSCHNACK. KEINE KOMPROMISSE. WIR SIND 3/4ZWÖÖÖLWE – PURE ENERGIE DIREKT AUS DEM PROBERAUM AUF DIE BÜHNE. LAUT, DRECKIG UND VERDAMMT NOCHMAL ECHT.
+        </p>
+        <a href="/about" class="block-font about-link">STORY LESEN</a>
+      </div>
+    </div>
+  </section>
+
+  <Gigs />
+</Layout>
+
+<script>
+  const slogans = [
+    'Unleash the Rock', 
+    'Pure Energy. Real Music.', 
+    'Live. Raw. Unfiltered.'
+  ];
+  const taglineElement = document.getElementById('tagline');
+
+  if (taglineElement) {
+    let currentIndex = 0; let charIndex = 0; let isDeleting = false;
+    const type = () => {
+      const slogan = slogans[currentIndex];
+      if (!isDeleting) {
+        taglineElement.textContent = slogan.substring(0, charIndex++);
+        if (charIndex > slogan.length) { isDeleting = true; setTimeout(type, 2000); return; }
+      } else {
+        taglineElement.textContent = slogan.substring(0, charIndex--);
+        if (charIndex === 0) { isDeleting = false; currentIndex = (currentIndex + 1) % slogans.length; }
+      }
+      setTimeout(type, isDeleting ? 40 : 80);
+    };
+    type();
+  }
+</script>
+
+<style>
+  /* --- HERO STYLES --- */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: #050505; position: relative; overflow: hidden; padding: 0 1rem;
+  }
+  .hero-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%; }
+  
+  .band-name-wrapper { position: relative; margin-bottom: 0.5rem; transform: rotate(-3deg); display: inline-block; }
+  .white-rock-style { display: block; font-size: clamp(6.5rem, 26vw, 18rem); color: #fff; letter-spacing: -3px; text-shadow: 5px 5px 0px #cc0000; font-family: 'Bebas Neue', sans-serif; line-height: 0.8; }
+
+  
+  .tagline-container { width: 100%; height: 3.5rem; display: flex; justify-content: center; align-items: center; margin-bottom: 5rem; }
+  .subtitle-style { font-size: clamp(1.2rem, 5vw, 2.2rem); color: #888; font-family: 'Bebas Neue', sans-serif; letter-spacing: 6px; text-transform: uppercase; }
+
+  .block-font { 
+    display: inline-block; background: #cc0000; color: #fff; text-decoration: none; 
+    font-family: 'Bebas Neue', sans-serif; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); 
+    padding: 1.2rem 3rem; transition: 0.2s; letter-spacing: 1px;
+  }
+  .block-font:hover { background: #fff; color: #cc0000; transform: scale(1.1); }
+
+  /* --- ABOUT SECTION STYLES --- */
+  .about-brief { padding: 10rem 2rem; background: #0a0a0a; border-top: 4px solid #cc0000; position: relative; }
+  .about-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  
+  .about-visual { position: relative; width: 100%; }
+  
+  /* Der ungefüllte Rahmen */
+  .image-backdrop {
+    position: absolute; top: 20px; left: -20px; width: 100%; height: 100%;
+    background: transparent; border: 3px solid #cc0000; z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s ease;
+  }
+  
+  .rock-image {
+    position: relative; z-index: 2; width: 100%; height: auto;
+    filter: grayscale(1); border: 2px solid #fff;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), filter 0.4s ease;
+  }
+
+  /* Der magnetische Snap-Effekt auf Hover */
+  .about-visual:hover .rock-image { transform: translate(-10px, 10px); filter: grayscale(0); }
+  .about-visual:hover .image-backdrop { transform: translate(10px, -10px); border-color: #fff; }
+
+  .small-heading { font-size: clamp(3rem, 10vw, 5rem) !important; margin-bottom: 2rem; text-align: left; }
+  .snappy-text { color: #eee; font-size: 1.2rem; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* Noise Overlay */
+  .noise { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); opacity: 0.3; pointer-events: none; z-index: 2; }
+
+  /* Responsive Anpassungen */
+  @media (max-width: 768px) {
+    .about-container { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
+    .small-heading { text-align: center; }
+    .about-visual { max-width: 400px; margin: 0 auto; }
+    .image-backdrop { top: 15px; left: -15px; }
+  }
+/* --- ZURÜCK ZUM ORIGINAL STYLE --- */
+.name-top {
+  display: block; /* Steht in eigener Zeile über dem Rest */
+  line-height: 1;
+  margin-bottom: -0.1em; /* Zieht es näher an das "ZWÖÖÖLWE" ran */
+}
+
+.red-block {
+  color: #cc0000; /* Einfach nur rot */
+  font-size: clamp(4rem, 15vw, 8.5rem); /* Groß und responsive */
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900;
+  /* Keine extra Rotation hier, da der ganze H1-Block schon gedreht ist */
+}
+
+/* Sicherstellen, dass der Haupt-Container rotiert ist */
+.band-name-wrapper {
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+</style>

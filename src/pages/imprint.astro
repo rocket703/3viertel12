@@ -1,0 +1,281 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Impressum">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <section class="legal-page">
+    <div class="noise"></div>
+    <div class="legal-container">
+      
+      <div class="back-navigation">
+        <a href="/" class="back-to-stage">
+          <span class="arrow">←</span> ZURÜCK ZUR BÜHNE
+        </a>
+      </div>
+
+      <div class="brand-header">
+        <h1 class="band-name">
+          <span class="name-top red-block">3/4</span>
+          <span class="name-bottom white-rock-style">IMPRESSUM</span>
+        </h1>
+      </div>
+
+      <div class="legal-content">
+        <h2 class="rock-subheading">Angaben gemäß § 5 DDG</h2>
+
+        <div class="contact-box">
+          <h3 class="box-title">Verantwortlich für den Inhalt:</h3>
+          <p>
+            3/4ZWÖÖÖLWE<br />
+            Lift'n up Produktion<br />
+            Albert-Brohme-Str. 35<br />
+            39326 Wolmirstedt<br />
+            DEUTSCHLAND
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <h3 class="box-title">Kontakt:</h3>
+          <p>
+            E-MAIL: INFO@3-4-ZWOOOELWE.DE<br />
+            TELEFON: [TELEFONNUMMER]
+          </p>
+        </div>
+
+        <h2 class="rock-subheading">Vertreten durch</h2>
+        <p class="legal-text">Berti?</p>
+
+        <h2 class="rock-subheading">Journalistisch-redaktionelle Inhalte</h2>
+        <p class="legal-text">Bandmitglied hier einfügen</p>
+
+        <h2 class="rock-subheading">Umsatzsteuer-ID</h2>
+        <p class="legal-text">
+          Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: [USt-ID-NR]
+        </p>
+
+        <h2 class="rock-subheading">Disclaimer – Rechtliche Hinweise</h2>
+
+        <div class="legal-block">
+          <h3>Haftung für Inhalte</h3>
+          <p>
+            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Als Diensteanbieter sind wir gemäß den allgemeinen Gesetzen für eigene Inhalte auf diesen Seiten verantwortlich.
+          </p>
+
+          <h3>Haftung für Links</h3>
+          <p>
+            Unsere Website enthält Links zu externen Websites Dritter. Auf deren Inhalte haben wir keinen Einfluss und können daher keine Gewähr übernehmen.
+          </p>
+
+          <h3>Urheberrecht</h3>
+          <p>
+            Die Inhalte auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung oder jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung.
+          </p>
+        </div>
+
+        <div class="design-credit-box">
+          <h2 class="credit-title">DESIGN & ENTWICKLUNG</h2>
+          <p class="credit-text">
+            DIESE WEBSITE WURDE VON 
+            <a href="https://r3webdesign.de" target="_blank" rel="noopener noreferrer" class="r3-link">
+              <span class="r3-tag">R3</span>WEBDESIGN
+            </a> 
+            ENTWICKELT.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal-page {
+    padding: 6rem 1.5rem;
+    background: #050505;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* --- ZURÜCK BUTTON --- */
+  .back-navigation {
+    margin-bottom: 4rem;
+  }
+
+  .back-to-stage {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+    background: #111;
+    padding: 0.8rem 2rem;
+    border: 1px solid #222;
+    letter-spacing: 2px;
+    transition: all 0.2s steps(3);
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .back-to-stage:hover {
+    background: #cc0000;
+    transform: translateX(-5px);
+    border-color: #fff;
+  }
+
+  /* --- BRAND HEADER --- */
+  .brand-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .band-name {
+    position: relative;
+    display: inline-block;
+    transform: rotate(-3deg);
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .red-block {
+    position: absolute;
+    top: -25%; left: -10%;
+    color: #cc0000;
+    font-size: clamp(3rem, 10vw, 5rem);
+    z-index: 5;
+  }
+
+  .white-rock-style {
+    display: block;
+    color: #fff;
+    font-size: clamp(4rem, 15vw, 9rem);
+    text-shadow: 4px 4px 0px #cc0000;
+    letter-spacing: -2px;
+    line-height: 0.8;
+  }
+
+  /* --- CONTENT STYLING --- */
+  .rock-subheading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #cc0000;
+    display: inline-block;
+  }
+
+  .legal-text, .legal-block p {
+    color: #888;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .legal-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: #cc0000;
+    margin-top: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* --- CONTACT BOXES --- */
+  .contact-box {
+    background: #111;
+    padding: 2.5rem;
+    border-left: 4px solid #cc0000;
+    margin-bottom: 2rem;
+    border-top: 1px solid #222;
+  }
+
+  .contact-box p {
+    color: #eee;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .box-title {
+    margin-top: 0 !important;
+    margin-bottom: 1rem;
+    color: #fff !important;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  /* --- DESIGN CREDIT BOX --- */
+  .design-credit-box {
+    margin-top: 6rem;
+    background: #111;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 1px solid #222;
+    border-top: 4px solid #cc0000; 
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .credit-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .credit-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: #888;
+    letter-spacing: 1px;
+  }
+
+  .r3-link {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+  }
+
+  .r3-tag {
+    background: #cc0000;
+    color: #fff;
+    padding: 0 6px;
+    font-weight: 900;
+    transform: skewX(-10deg); 
+    display: inline-block;
+  }
+
+  .r3-link:hover { color: #cc0000; }
+  .r3-link:hover .r3-tag { background: #fff; color: #cc0000; }
+
+  .noise {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .white-rock-style { font-size: 4.5rem; }
+    .red-block { font-size: 2.5rem; }
+    .rock-subheading { font-size: 1.8rem; }
+    .design-credit-box { padding: 2rem 1.5rem; }
+  }
+</style>

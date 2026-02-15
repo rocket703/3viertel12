@@ -1,0 +1,25 @@
+{
+  "name": "3-4-zwoelwe-band",
+  "version": "1.0.0",
+  "description": "Official website for 3/4Zwööölwe Rockband",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [
+    "astro",
+    "blog",
+    "rockband"
+  ],
+  "author": "r3webdesign",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

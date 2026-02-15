@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "slug": "rockclub-magdeburg-2026",
+    "date": "2026-03-15",
+    "time": "20:00",
+    "venue": "Rockclub Magdeburg",
+    "street": "Karl-Schmidt-Straße 26",
+    "zip": "39104",
+    "city": "Magdeburg",
+    "ticket_url": "https://tickets.example.com",
+    "description": "Heimspiel! Wir zerlegen den Rockclub in seine Einzelteile. Seid bereit für pure Energie.",
+    "sold_out": false
+  },
+  {
+    "id": 2,
+    "slug": "kulturzentrum-halle-2026",
+    "date": "2026-03-22",
+    "time": "21:00",
+    "venue": "Kulturzentrum Halle",
+    "street": "Mansfelder Str. 56",
+    "zip": "06108",
+    "city": "Halle",
+    "ticket_url": "https://tickets.example.com",
+    "description": "Halle, wir bringen den Krach zu euch. Ein Abend voller Riffs und Schweiß im Kulturzentrum.",
+    "sold_out": false
+  },
+  {
+    "id": 3,
+    "slug": "klub-subkultur-berlin-2026",
+    "date": "2026-04-05",
+    "time": "20:30",
+    "venue": "Klub Subkultur",
+    "street": "Revaler Str. 99",
+    "zip": "10245",
+    "city": "Berlin",
+    "ticket_url": "https://tickets.example.com",
+    "description": "Berlin Calling! Die Hauptstadt bekommt eine ordentliche Packung 3/4ZWÖÖÖLWE. Achtung: Fast ausverkauft!",
+    "sold_out": true
+  },
+  {
+    "id": 4,
+    "slug": "rockfabrik-leipzig-2026",
+    "date": "2026-04-19",
+    "time": "21:00",
+    "venue": "Rockfabrik Leipzig",
+    "street": "Kochstraße 132",
+    "zip": "04277",
+    "city": "Leipzig",
+    "ticket_url": "https://tickets.example.com",
+    "description": "In der Rockfabrik wird noch echtes Handwerk betrieben. Wir liefern den Soundtrack zur Schicht.",
+    "sold_out": false
+  },
+  {
+    "id": 5,
+    "slug": "backstage-club-dresden-2026",
+    "date": "2026-05-10",
+    "time": "20:00",
+    "venue": "Backstage Club",
+    "street": "Werner-Hartmann-Straße 2",
+    "zip": "01099",
+    "city": "Dresden",
+    "ticket_url": "https://tickets.example.com",
+    "description": "Dresden, wir kommen! Der Backstage Club wird beben. Sichert euch rechtzeitig die Tickets.",
+    "sold_out": false
+  }
+]

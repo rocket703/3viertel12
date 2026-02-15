@@ -1,0 +1,186 @@
+---
+import gigs from '../data/gigs.json';
+
+const sortedGigs = gigs.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+---
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<section class="gigs-section" id="gigs">
+  <div class="gigs-container">
+    <div class="section-header">
+      <h2 class="rock-heading">TOUR TERMINE</h2>
+    </div>
+
+    <div class="gigs-grid">
+      {sortedGigs.map((gig) => (
+        <div class="gig-card">
+          <div class="gig-date-box">
+            <span class="day">{new Date(gig.date).getDate()}</span>
+            <span class="month">{new Date(gig.date).toLocaleDateString('de-DE', { month: 'short' })}</span>
+          </div>
+
+          <div class="gig-content">
+            <h3 class="venue">{gig.venue}</h3>
+            <p class="gig-city">{gig.city}</p>
+          </div>
+
+          <div class="gig-action">
+            <a href={`/gigs/${gig.slug}`} class="ticket-btn rock-btn">
+              DETAILS
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Dein CSS bleibt gleich, ich habe nur sichergestellt, dass die Struktur oben passt */
+  .gigs-section {
+    padding: 8rem 1.5rem;
+    background: #0a0a0a;
+    border-top: 4px solid #cc0000;
+  }
+
+  .gigs-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    transform: rotate(-2deg);
+  }
+
+  .rock-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: #fff;
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0px #cc0000;
+  }
+
+  .rock-subline {
+    font-size: 1.1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+  }
+
+  .gigs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .gig-card {
+    background: #111;
+    display: grid;
+    grid-template-columns: 120px 1fr 220px;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border: 1px solid #222;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .gig-card:hover {
+    background: #161616;
+    border-color: #cc0000;
+    transform: scale(1.02);
+  }
+
+  .gig-date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid #222;
+    padding-right: 1.5rem;
+  }
+
+  .gig-date-box .day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: #cc0000;
+    line-height: 1;
+  }
+
+  .gig-date-box .month {
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .gig-content {
+    padding-left: 2rem;
+  }
+
+  .venue {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .gig-city {
+    color: #888;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0.2rem 0;
+  }
+
+  .gig-time {
+    color: #cc0000;
+    font-weight: 900;
+    font-size: 0.9rem;
+  }
+
+  .gig-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .ticket-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s steps(3);
+    border: none;
+    width: 100%;
+    background: #cc0000;
+    color: #fff;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+  }
+
+  .rock-btn:hover {
+    background: #fff;
+    color: #cc0000;
+  }
+
+  .no-gigs {
+    text-align: center;
+    padding: 4rem;
+    color: #888;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .gig-card { grid-template-columns: 100px 1fr; }
+    .gig-action { grid-column: 1 / span 2; margin-top: 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .gig-card { grid-template-columns: 1fr; text-align: center; }
+    .gig-date-box { border-right: none; border-bottom: 2px solid #222; padding: 0 0 1rem 0; margin-bottom: 1rem; }
+    .gig-content { padding-left: 0; }
+  }
+</style>
